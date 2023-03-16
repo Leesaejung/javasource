@@ -1,0 +1,5 @@
+package shop;
+
+public enum Week {
+	MONDAY, TUSEDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY;
+}
