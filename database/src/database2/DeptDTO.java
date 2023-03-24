@@ -5,6 +5,7 @@ package database2;
 // ~~VO(Value Object)
 
 // db 데이터 내용을 전송하는 용도로 주로 사용
+// 사용자 입력결과를 DAO 클래스로 넘길 떄 사용
 // table 컬럼과 동일하게 작성
 // getter/setter 메소드, 생성자, toString() 작성
 
