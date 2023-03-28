@@ -41,7 +41,7 @@ public class ShopMain {
 				shop.start();
 				break;
 			case 4:
-				// user 전체 조ㅗ히
+				// user 전체 조회
 				shop.userList();
 				break;
 			case 5: //종료
