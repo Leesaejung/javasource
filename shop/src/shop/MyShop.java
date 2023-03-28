@@ -41,7 +41,7 @@ public class MyShop implements IShop{
 		//Product 4개(CellPhone 2개, SmartTv 2개) 생성 후 배열에 저장
 		products.add(new CellPhone("갤럭시 노트 10",500000,"SKT"));
 		products.add(new CellPhone("애플 아이폰 13",900000,"U+"));
-		products.add(new SmartTv("삼성 3D Smart", 1500000, "4K"));
+		products.add(new SmartTv("삼성 3D Smart TV", 1500000, "4K"));
 		products.add(new SmartTv("LG Smart Tv", 1200000, "Full HD"));
 	}
 
