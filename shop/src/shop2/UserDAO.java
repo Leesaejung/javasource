@@ -64,7 +64,12 @@ public class UserDAO {
 			con = getConnection();
 			
 			// suser 전체 조회
-			String sql = "select * from suser";
+//			String sql = "select * from suser";
+			
+			// 맨 마지막마다 띄어쓰기 중요
+			String sql = "select u.user_id, u.name, u.pay_no, p.info " 
+					+ "from suser u, paytype p " 
+					+ "where u.pay_no = p.pay_no";
 			
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -73,7 +78,7 @@ public class UserDAO {
 //				UserDTO dto = new UserDTO(rs.getInt(1), rs.getString(2), rs.getInt(3));
 //				list.add(dto);
 				
-				list.add(new UserDTO(rs.getInt(1), rs.getString(2), rs.getInt(3)));
+				list.add(new UserDTO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4)));
 			}
 			
 		} catch (Exception e) {
@@ -83,6 +88,8 @@ public class UserDAO {
 		}
 		return list;
 	}
+	
+	
 	
 	
 }
