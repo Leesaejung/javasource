@@ -3,39 +3,36 @@ package exam;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import user.domain.LoginDTO;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class LoginServlet2
  */
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/login2")
+public class LoginServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		
 		String userid = request.getParameter("userid");
 		String password = request.getParameter("password");
 		
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
+		// loginPro 에서 userid, password 값 공유를 하고 싶음
+		// setAttribute(), getAttribute(), removeAttribute()
 		
-		out.print("<h4>아이디 : "+userid+"</h4>");
-		out.print("<h4>비밀번호 : "+password+"</h4>");
+		request.setAttribute("userid", userid);
+		request.setAttribute("password", password);
 		
-		// 세션 저장
-		HttpSession session = request.getSession(); // 세션 얻어오기
-		session.setAttribute("loginDTO", new LoginDTO(userid, password));
-		// 페이지 이동 코드
-		out.print("<h4><a href=\"session/request2.jsp\">이동</a></h4>");
+		RequestDispatcher rd = request.getRequestDispatcher("/forward/loginPro.jsp");
+		rd.forward(request, response);
 		
+		//response.setContentType("text/html;charset=utf-8");
+		//PrintWriter out = response.getWriter();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -7,12 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>장바구니 비우기</h1>
-<%
-	// 장바구니 세션 제거
-	/* session.invalidate(); */
-	session.removeAttribute("products");
-%>
-<h4><a href="cart.html">상품 선택</a></h4>
+<h4>아이디 : <%=request.getAttribute("userid") %></h4>
+<h4>비밀번호 : <%=request.getAttribute("password") %></h4>
 </body>
 </html>
