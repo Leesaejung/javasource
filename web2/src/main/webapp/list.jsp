@@ -20,7 +20,6 @@
 	String sql = "select * from usertbl";
 	PreparedStatement pstmt = con.prepareStatement(sql);
 	 
-	
 	ResultSet rs = pstmt.executeQuery(); // 쿼리문 실행한 후 결과 전송
 %>
 <table class="table">
