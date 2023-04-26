@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.ActionFactory;
+import action.Actionforward;
 import action.DeleteAction;
 import action.InsertAction;
 
@@ -25,38 +29,35 @@ public class PatternController extends HttpServlet {
 		
 		request.setCharacterEncoding("utf-8");
 		
-		String requestURI = request.getRequestURI(); 
-		String contextPath = request.getContextPath(); //프로젝트 == context
-		String cmd = requestURI.substring(contextPath.length());
+		String requestURI = request.getRequestURI();    //pattern/list.do
+		String contextPath = request.getContextPath(); //프로젝트 == context   //pattern
+		String cmd = requestURI.substring(contextPath.length()); //list.do
 		
 		System.out.println("requestURI"+requestURI);
 		System.out.println("contextPath"+contextPath);
 		System.out.println("cmd"+cmd);
 		
-		Action action = null;
 		
-		// 어디에서 요청이 왔는지
-		if(cmd.equals("/insert.do")){
-			action = new InsertAction();
-			try {				
-				action.execute(request);
+		ActionFactory actionFactory = ActionFactory.getInstanse(); //new 하면 생성자 안 보임, 그래서 싱글톤 패턴으로 만듦 
+		Action action = actionFactory.action(cmd);
+		
+		
+		// 생선된 액션에 일 시키기(메소드 호출)
+		Actionforward af = null;
+			try {
+				 af = action.execute(request);  //execute => 가져오는 작업
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(cmd.equals("/list.do")) {
 			
-		}else if(cmd.equals("/update.do")) {
-			
-		}else if(cmd.equals("/delete.do")) {
-			action = new DeleteAction();
-			try {
-				action.execute(request);
-			} catch (Exception e) {
-				e.printStackTrace();
+			// 
+			if(af.isRedirect()) {
+				response.sendRedirect(af.getPath());
+			}else {
+				RequestDispatcher rd = request.getRequestDispatcher(af.getPath());
+				rd.forward(request, response);
 			}
 		}
-		
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
