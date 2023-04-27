@@ -204,7 +204,7 @@ public class BookDAO {
 	// 도서 정보 삭제
 	// delete from booktbl where code = ?
 	
-	public boolean remove(int code) {
+	public boolean delete(int code) {
 		boolean flag = false;
 		
 		try {
@@ -227,5 +227,40 @@ public class BookDAO {
 			close(con, pstmt);
 		}
 		return flag;
+	}
+	
+	public List<BookDTO> getSearchList(String criteria, String keyword) {
+		List<BookDTO> list = new ArrayList();
+		
+		try{
+			
+			con = getConnection();
+			// criteria value => writer or title
+//			String sql = "select code,title,writer,price from booktbl where ";
+//			if(criteria.equals("writer")) {
+//				sql += "writer like ?";
+//			}else {
+//				sql += "title like ?";
+//			} // 밑의 sql문 사용하려면 239 ~ 244줄 가리면 됨
+			
+			String sql = "select code,title,writer,price from booktbl where " + criteria + " like ? order by code desc";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BookDTO dto = new BookDTO();
+				dto.setCode(rs.getInt("code"));
+				dto.setTitle(rs.getString("title"));
+				dto.setWriter(rs.getString("writer"));
+				dto.setPrice(rs.getInt("price"));
+				list.add(dto);
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}finally {
+			close(con, pstmt, rs);
+		}
+		return list;
 	}
 }
