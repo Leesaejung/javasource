@@ -54,7 +54,7 @@
 		        	File f= new File(path+"\\"+uuid.toString()+"_"+value); // c:\\upload\\고유값_test.html
 		        	item.write(f); //파일저장 클라이언트가 서버 쪽으로 파일 전송
 		        	
-		        	// 다운로드를 위한 링크 생성
+		        	// 다운로드를 위한 링크 생성, 인코딩
 		        	String encodeName = URLEncoder.encode(f.getName(), "utf-8");
 		        	
 		        	out.print("<p>");
