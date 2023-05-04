@@ -229,6 +229,7 @@ public class BookDAO {
 		return flag;
 	}
 	
+	// 검색
 	public List<BookDTO> getSearchList(String criteria, String keyword) {
 		List<BookDTO> list = new ArrayList();
 		

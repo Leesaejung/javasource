@@ -6,15 +6,20 @@
 	 location.href="list.do"
  })
  
+ // readForm을 가져온 후 readForm 전송
+	const readForm = document.querySelector("#readForm");
+	
+ // 답변 클릭 시
+  document.querySelector(".btn-secondary").addEventListener("click",()=>{
+	readForm.action = "replyView.do"; 
+	readForm.submit(); 
+ })
  
  
  // 수정 클릭 시 submit 기능 중지
  document.querySelector("form").addEventListener("submit",(e)=>{
 	 e.preventDefault();
 	 
- // readForm을 가져온 후 readForm 전송
-	const readForm = document.querySelector("#readForm");
-	
  // modify.do
 	readForm.action = "modify.do"; 
 	readForm.submit(); 
