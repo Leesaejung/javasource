@@ -11,15 +11,16 @@ public class BoardSearchAction implements Action {
 
 	@Override
 	public ActionForward excute(HttpServletRequest request) throws Exception {
-		String criteria = request.getParameter("criteria");
-		String keyword = request.getParameter("keyword");
-		
-		BoardSearchService service = new BoardSearchService();
-		List<BoardDTO> list = service.search(criteria, keyword);
-		
-		request.setAttribute("list", list);
-		
-		return new ActionForward(false, "listForm.jsp");
-	}
+		// 검색기준과 검색어 가져오기
+				String criteria = request.getParameter("criteria");
+				String keyword = request.getParameter("keyword");
+				
+				BoardSearchService service = new BoardSearchService();		
+				List<BoardDTO> list = service.search(criteria, keyword);
+				
+				request.setAttribute("list", list);
+				
+				return new ActionForward(false, "listForm.jsp");
+			}
 
 }

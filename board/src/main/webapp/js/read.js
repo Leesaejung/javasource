@@ -1,13 +1,14 @@
 /**
  * 
  */
-
- document.querySelector(".btn-success").addEventListener("click",()=>{
-	 location.href="list.do"
- })
- 
  // readForm을 가져온 후 readForm 전송
 	const readForm = document.querySelector("#readForm");
+
+ document.querySelector(".btn-success").addEventListener("click",()=>{
+	readForm.action = "list.do"; 
+	readForm.submit(); 
+ })
+ 
 	
  // 답변 클릭 시
   document.querySelector(".btn-secondary").addEventListener("click",()=>{
